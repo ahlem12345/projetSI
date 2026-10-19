@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.ahlembensalem4cce11.domaine.Vehicule;
 import tn.esprit.ahlembensalem4cce11.service.VehiculeServiceImpl;
-import tn.esprit.ahlembensalem4cce11.service.VehiculeServiceImpl;
 @RequiredArgsConstructor
 @RequestMapping("vehicules")
 @RestController
