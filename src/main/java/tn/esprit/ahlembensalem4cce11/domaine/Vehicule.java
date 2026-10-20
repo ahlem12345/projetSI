@@ -1,6 +1,8 @@
 
 package tn.esprit.ahlembensalem4cce11.domaine;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,12 +45,13 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
+    @JsonBackReference("agence-vehicules")
     @ManyToOne(fetch = FetchType.LAZY)
     private Agence agence;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Equipement> equipements = new HashSet<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicule", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Maintenance> maintenances = new ArrayList<>();
 

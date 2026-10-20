@@ -1,6 +1,7 @@
 
 package tn.esprit.ahlembensalem4cce11.domaine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Equipement {
     private Long idEquipement;
 
     private String libelle;
+    @JsonIgnore
     @ManyToMany(mappedBy = "equipements", fetch = FetchType.LAZY)
     Set<Vehicule> vehicule=new HashSet<>();
 

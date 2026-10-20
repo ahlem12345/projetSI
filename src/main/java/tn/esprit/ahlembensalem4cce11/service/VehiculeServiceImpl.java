@@ -10,7 +10,7 @@ import tn.esprit.ahlembensalem4cce11.repository.IVehiculeRepository;
 
 @Service
 @RequiredArgsConstructor
-public class VehiculeServiceImpl implements IVehiculeServices {
+public class VehiculeServiceImpl implements IVehiculeService {
 
     private final IVehiculeRepository vehiculeRepository;
 

@@ -3,7 +3,7 @@ package tn.esprit.ahlembensalem4cce11.service;
 import java.util.List;
 import tn.esprit.ahlembensalem4cce11.domaine.Vehicule;
 
-public interface IVehiculeServices {
+public interface IVehiculeService {
 
     Vehicule create(Vehicule vehicule);
 
