@@ -1,1 +1,2 @@
 # projetSI
+ON a une entreprise de location de véhicules disposant de plusieurs agences réparties dans différentes villes. Chaque agence gère une flotte de véhicules de catégories variées (citadine, berline, SUV, utilitaire). Les clients réservent un véhicule pour une période donnée ; à la signature, un contrat est établi et des paiements y sont rattachés. L’entreprise souhaite numériser l’ensemble du processus : réservation, contractualisation, facturation, suivi de flotte et relances automatiques, au travers d’une application back-end Spring Boot exposant une API REST.
