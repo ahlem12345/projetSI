@@ -1,6 +1,7 @@
 
 package tn.esprit.ahlembensalem4cce11.domaine;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,10 +26,13 @@ public class Contrat {
     private LocalDate dateSignature;
     private BigDecimal montantTotal;
     private boolean valide;
+    @JsonManagedReference("contrat-paiements")
     @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL,
             orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Paiement> paiements = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY)
     private Reservation reservation;
+
+
 
 }

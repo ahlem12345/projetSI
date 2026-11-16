@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.ahlembensalem4cce11.domaine.Agence;
+import tn.esprit.ahlembensalem4cce11.domaine.Equipement;
 import tn.esprit.ahlembensalem4cce11.domaine.Vehicule;
 import tn.esprit.ahlembensalem4cce11.exception.ResourceNotFoundException;
+import tn.esprit.ahlembensalem4cce11.repository.IAgenceRepository;
+import tn.esprit.ahlembensalem4cce11.repository.IEquipementRepository;
 import tn.esprit.ahlembensalem4cce11.repository.IVehiculeRepository;
 
 @Service
@@ -13,7 +17,8 @@ import tn.esprit.ahlembensalem4cce11.repository.IVehiculeRepository;
 public class VehiculeServiceImpl implements IVehiculeService {
 
     private final IVehiculeRepository vehiculeRepository;
-
+    private final IAgenceRepository iAgenceRepository;
+    private final IEquipementRepository iEquipementRepository;
     @Override
     public Vehicule create(Vehicule vehicule) {
         if (vehicule.getIdVehicule() != null) {
@@ -56,6 +61,24 @@ public class VehiculeServiceImpl implements IVehiculeService {
         }
         vehiculeRepository.deleteById(id);
     }
+
+    @Override
+    public Vehicule assignToAgence(Long idVehicule, Long idAgence) {
+        Vehicule vehicule = findById(idVehicule);
+        Agence agence = iAgenceRepository.findById(idAgence).orElseThrow(() -> new ResourceNotFoundException("Agence", idAgence));
+        vehicule.setAgence(agence);
+
+        return vehiculeRepository.save(vehicule);
+    }
+
+    @Override
+    public Vehicule assignToEquipement(Long idVehicule, Long idEquipement) {
+        Vehicule vehicule = findById(idVehicule);
+        Equipement equipement = iEquipementRepository.findById(idEquipement).orElseThrow(() -> new ResourceNotFoundException("Equipement",idEquipement));;
+        vehicule.getEquipements().add(equipement);
+        return vehiculeRepository.save(vehicule);
+    }
+
 
     private void verifier(Vehicule vehicule) {
         BigDecimal tarif = vehicule.getTarifJournalier();

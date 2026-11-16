@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.ahlembensalem4cce11.domaine.Vehicule;
 import tn.esprit.ahlembensalem4cce11.service.IVehiculeService;
-
+import org.springframework.http.ResponseEntity;
 @Tag(name = "Véhicules", description = "Gestion des véhicules de location")
 @RestController
 @RequestMapping("/vehicules")
@@ -71,5 +72,17 @@ public class VehiculeRestController {
     public void deleteById(
             @Parameter(description = "Identifiant du véhicule") @PathVariable Long id) {
         vehiculeService.deleteById(id);
+    }
+
+    @Operation(summary = "Affecter un véhicule à une agence")
+    @PutMapping("/{idVehicule}/agence/{idAgence}")
+    public Vehicule assignToAgence(@PathVariable Long idVehicule, @PathVariable Long idAgence) {
+        return vehiculeService.assignToAgence(idVehicule, idAgence);
+    }
+
+    @Operation(summary = "Ajouter un équipement à un véhicule")
+    @PutMapping("/{idVehicule}/equipements/{idEquipement}")
+    public Vehicule assignToEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
+        return vehiculeService.assignToEquipement(idVehicule, idEquipement);
     }
 }
